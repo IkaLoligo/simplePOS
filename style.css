@@ -1,0 +1,27 @@
+main {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    div, button {
+        width: 150px;
+        height: 74px;
+    }
+}
+
+
+
+#productList{
+    align-self: center;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    
+}
+
+#actionButtons {
+    align-self: center;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+}
