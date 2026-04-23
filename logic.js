@@ -3,6 +3,7 @@ let selected = document.getElementById("selected")
 let count = document.getElementById("count")
 let todayTotalNumber = document.getElementById("todayTotalNumber")
 let totalCurrentCustomer = document.getElementById("totalCurrentCustomer")
+let listCurrentOrders = document.getElementById("listCurrentOrder")
 
 // variables numbers for var text
 let countNumber = 0;
@@ -32,16 +33,46 @@ const todayTotalList = document.getElementById("todayTotalList")
 const nextCustomer = document.getElementById("nextCustomer")
 
 let itemPrices = [
-    2,
-    2,
-    8,
-    3,
-    5,
-    8,
-    20,
-    5,
-    18,
-    15
+    {
+        name:"sticker",
+        price: 2,
+    },
+    {
+        name:"sticker Merlijn",
+        price: 2,
+    },
+    {
+        name:"keychain",
+        price: 8,
+    },
+        {
+        name:"Eevee Roll",
+        price: 3,
+    },
+    {
+        name:"Phone Charm",
+        price: 5,
+    },
+    {
+        name:"Mystery Bag",
+        price: 8,
+    },
+    {
+        name:"pkm bag",
+        price: 20,
+    },
+    {
+        name:"hand fans",
+        price: 5,
+    },
+    {
+        name:"Pipi",
+        price: 18,
+    },
+    {
+        name:"Stickerbook",
+        price: 15,
+    },
 ]
 
 
@@ -132,12 +163,17 @@ product10.addEventListener('click', () => {
 
 console.log("hallo",product1)
 
-//manipulator logic
+//Add one logic
 addOne.addEventListener('click', () => {
     countNumber +=1;
     count.innerHTML = countNumber;
-    price += itemPrices[selectedNumber];
+    price += itemPrices[selectedNumber].price;
     totalCurrentCustomer.innerHTML = price;
+    let addItemToCurrentCustomer = itemPrices[selectedNumber].name;
+    let liCreater = document.createElement("li");
+    liCreater.innerText = addItemToCurrentCustomer;
+    listCurrentOrders.appendChild(liCreater);
 
+    
 })
 
