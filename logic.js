@@ -1,12 +1,10 @@
 // Variable text 
 let selected = document.getElementById("selected")
-let count = document.getElementById("count")
 let todayTotalNumber = document.getElementById("todayTotalNumber")
 let totalCurrentCustomer = document.getElementById("totalCurrentCustomer")
 let listCurrentOrders = document.getElementById("listCurrentOrder")
 
 // variables numbers for var text
-let countNumber = 0;
 let totalCurrentCustomerTotal = 0;
 let selectedNumber = 0;
 let price = 0;
@@ -26,7 +24,6 @@ const product10 = document.querySelector(".itemButton:nth-child(10)")
 
 //buttons manipulators
 const addOne = document.getElementById("addOne")
-const administerProduct = document.getElementById("administerProduct")
 const selectLastProduct = document.getElementById("selectLastProduct")
 const selectedProductDelete = document.getElementById("selectedProductDelete")
 const todayTotalList = document.getElementById("todayTotalList")
@@ -90,8 +87,6 @@ let itemPrices = [
 product1.addEventListener('click', () => {
     selected.innerText = product1.innerText;
     console.log("button 1 pressed!");
-    countNumber = 0;
-    count.innerHTML = countNumber;
     selectedNumber = 0;
 
 
@@ -100,8 +95,6 @@ product1.addEventListener('click', () => {
 product2.addEventListener('click', () => {
     selected.innerText = product2.innerText;
     console.log("button 2 pressed!");
-    countNumber = 0;
-    count.innerHTML = countNumber;
     selectedNumber = 1;    
 
 })
@@ -109,64 +102,48 @@ product2.addEventListener('click', () => {
 product3.addEventListener('click', () => {
     selected.innerText = product3.innerText;
     console.log("button 3 pressed!");
-    countNumber = 0;
-    count.innerHTML = countNumber;
     selectedNumber = 2;
 })
 
 product4.addEventListener('click', () => {
     selected.innerText = product4.innerText;
     console.log("button 4 pressed!");
-    countNumber = 0;
-    count.innerHTML = countNumber;
     selectedNumber = 3;
 })
 
 product5.addEventListener('click', () => {
     selected.innerText = product5.innerText;
     console.log("button 5 pressed!");
-    countNumber = 0;
-    count.innerHTML = countNumber;
     selectedNumber = 4;    
 })
 
 product6.addEventListener('click', () => {
     selected.innerText = product6.innerText;
     console.log("button 6 pressed!");
-    countNumber = 0;
-    count.innerHTML = countNumber;
     selectedNumber = 5;    
 })
 
 product7.addEventListener('click', () => {
     selected.innerText = product7.innerText;
     console.log("button 7 pressed!");
-    countNumber = 0;
-    count.innerHTML = countNumber;
     selectedNumber = 6;
 })
 
 product8.addEventListener('click', () => {
     selected.innerText = product8.innerText;
     console.log("button 8 pressed!");
-    countNumber = 0;
-    count.innerHTML = countNumber;
     selectedNumber = 7;
 })
 
 product9.addEventListener('click', () => {
     selected.innerText = product9.innerText;
     console.log("button 9 pressed!");
-    countNumber = 0;
-    count.innerHTML = countNumber;
     selectedNumber = 8;
 })
 
 product10.addEventListener('click', () => {
     selected.innerText = product10.innerText;
     console.log("button 10 pressed!");
-    countNumber = 0;
-    count.innerHTML = countNumber;
     selectedNumber = 9;
 })
 
@@ -175,8 +152,6 @@ console.log("hallo",product1)
 
 //Add one logic
 addOne.addEventListener('click', () => {
-    countNumber +=1;
-    count.innerHTML = countNumber;
     price += itemPrices[selectedNumber].price;
     totalCurrentCustomer.innerHTML = '€' + price + ',-';
     
@@ -206,4 +181,7 @@ addOne.addEventListener('click', () => {
     
 })
 
- 
+ nextCustomer.addEventListener('click', () => {
+    //main funct 1 Add products to a list to be processed into an xml file -> how to? indexedDB!?
+    //main funct 2 Delete the current customers data from the current order -> can be done now
+ })
