@@ -36,42 +36,52 @@ let itemPrices = [
     {
         name:"sticker",
         price: 2,
+        currentCustomerCount: 0,
     },
     {
         name:"sticker Merlijn",
         price: 2,
+        currentCustomerCount: 0,        
     },
     {
         name:"keychain",
         price: 8,
+        currentCustomerCount: 0,
     },
         {
         name:"Eevee Roll",
         price: 3,
+        currentCustomerCount: 0,
     },
     {
         name:"Phone Charm",
         price: 5,
+        currentCustomerCount: 0,
     },
     {
         name:"Mystery Bag",
         price: 8,
+        currentCustomerCount: 0,
     },
     {
         name:"pkm bag",
         price: 20,
+        currentCustomerCount: 0,
     },
     {
         name:"hand fans",
         price: 5,
+        currentCustomerCount: 0,
     },
     {
         name:"Pipi",
         price: 18,
+        currentCustomerCount: 0,
     },
     {
         name:"Stickerbook",
         price: 15,
+        currentCustomerCount: 0,
     },
 ]
 
@@ -168,12 +178,32 @@ addOne.addEventListener('click', () => {
     countNumber +=1;
     count.innerHTML = countNumber;
     price += itemPrices[selectedNumber].price;
-    totalCurrentCustomer.innerHTML = price;
-    let addItemToCurrentCustomer = itemPrices[selectedNumber].name;
-    let liCreater = document.createElement("li");
-    liCreater.innerText = addItemToCurrentCustomer;
-    listCurrentOrders.appendChild(liCreater);
+    totalCurrentCustomer.innerHTML = '€' + price + ',-';
+    
 
+    //Go through itemPrices array, if itemprices.currentCustomerCount > 0,
+    //then append li with itemprices[x].name + " " + itemprices[x].currentCustomerCount
+    //else next loop iteration
+    //
+    while (listCurrentOrders.firstChild) {
+        listCurrentOrders.removeChild(listCurrentOrders.firstChild);
+    };
+
+    let addCountToCurrentCustomer = itemPrices[selectedNumber].currentCustomerCount +=1;
+    for (let arrayCount = 0; arrayCount < itemPrices.length; arrayCount ++) {
+        if (itemPrices[arrayCount].currentCustomerCount > 0) {
+            let liCreater = document.createElement("li");
+            liCreater.classList.add('liCurrentCustomerItem');
+            liCreater.innerText = itemPrices[arrayCount].name + " count = " + itemPrices[arrayCount].currentCustomerCount;
+            listCurrentOrders.appendChild(liCreater);
+        }
+
+    }
+    
+
+
+    console.log(itemPrices[selectedNumber].currentCustomerCount);
     
 })
 
+ 
