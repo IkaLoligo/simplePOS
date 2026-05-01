@@ -34,51 +34,71 @@ let itemPrices = [
         name:"sticker",
         price: 2,
         currentCustomerCount: 0,
+        totalBoughtPeriodCount: 0,
+        totalBoughtPeriodRevenue: 0,
     },
     {
         name:"sticker Merlijn",
         price: 2,
-        currentCustomerCount: 0,        
+        currentCustomerCount: 0,    
+        totalBoughtPeriodCount: 0,
+        totalBoughtPeriodRevenue: 0,    
     },
     {
         name:"keychain",
         price: 8,
         currentCustomerCount: 0,
+        totalBoughtPeriodCount: 0,
+        totalBoughtPeriodRevenue: 0,
     },
         {
         name:"Eevee Roll",
         price: 3,
         currentCustomerCount: 0,
+        totalBoughtPeriodCount: 0,
+        totalBoughtPeriodRevenue: 0,
     },
     {
         name:"Phone Charm",
         price: 5,
         currentCustomerCount: 0,
+        totalBoughtPeriodCount: 0,
+        totalBoughtPeriodRevenue: 0,
     },
     {
         name:"Mystery Bag",
         price: 8,
         currentCustomerCount: 0,
+        totalBoughtPeriodCount: 0,
+        totalBoughtPeriodRevenue: 0,
     },
     {
         name:"pkm bag",
         price: 20,
         currentCustomerCount: 0,
+        totalBoughtPeriodCount: 0,
+        totalBoughtPeriodRevenue: 0,
     },
     {
         name:"hand fans",
         price: 5,
         currentCustomerCount: 0,
+        totalBoughtPeriodCount: 0,
+        totalBoughtPeriodRevenue: 0,
     },
     {
         name:"Pipi",
         price: 18,
         currentCustomerCount: 0,
+        totalBoughtPeriodCount: 0,
+        totalBoughtPeriodRevenue: 0,
     },
     {
         name:"Stickerbook",
         price: 15,
         currentCustomerCount: 0,
+        totalBoughtPeriodCount: 0,
+        totalBoughtPeriodRevenue: 0,
     },
 ]
 
@@ -184,4 +204,7 @@ addOne.addEventListener('click', () => {
  nextCustomer.addEventListener('click', () => {
     //main funct 1 Add products to a list to be processed into an xml file -> how to? indexedDB!?
     //main funct 2 Delete the current customers data from the current order -> can be done now
+
+    
+
  })
