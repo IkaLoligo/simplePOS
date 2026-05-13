@@ -212,7 +212,7 @@ addOne.addEventListener('click', () => {
             itemPrices[arrayCount].totalBoughtPeriodCount += itemPrices[arrayCount].currentCustomerCount;
             itemPrices[arrayCount].totalBoughtPeriodRevenue += itemPrices[arrayCount].price * itemPrices[arrayCount].currentCustomerCount;
             salesPeriodTotalRevenue += itemPrices[arrayCount].totalBoughtPeriodRevenue
-            todayTotalNumber.innerHTML = 'total today : €' + salesPeriodTotalRevenue + ',-'; 
+            todayTotalNumber.innerHTML = 'Total today: €' + salesPeriodTotalRevenue + ',-'; 
             console.log(itemPrices[arrayCount]);
             itemPrices[arrayCount].currentCustomerCount = 0;
             
