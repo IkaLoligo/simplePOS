@@ -28,8 +28,7 @@ const product10 = document.querySelector(".itemButton:nth-child(10)")
 
 //buttons manipulators
 const addOne = document.getElementById("addOne")
-const selectLastProduct = document.getElementById("selectLastProduct")
-const selectedProductDelete = document.getElementById("selectedProductDelete")
+const removeOne = document.getElementById("removeOne")
 const todayTotalList = document.getElementById("todayTotalList")
 const nextCustomer = document.getElementById("nextCustomer")
 
@@ -189,6 +188,7 @@ addOne.addEventListener('click', () => {
     };
 
     let addCountToCurrentCustomer = itemPrices[selectedNumber].currentCustomerCount +=1;
+    console.log(itemPrices);
     for (let arrayCount = 0; arrayCount < itemPrices.length; arrayCount ++) {
         if (itemPrices[arrayCount].currentCustomerCount > 0) {
             let liCreater = document.createElement("li");
@@ -198,6 +198,7 @@ addOne.addEventListener('click', () => {
         }
 
     }
+    console.log(itemPrices);
     
 
 
@@ -206,26 +207,30 @@ addOne.addEventListener('click', () => {
 })
 
  nextCustomer.addEventListener('click', () => {
+    salesPeriodTotalRevenue = 0;
     //main funct 1 Add products to a list to be processed into an xml file -> how to? indexedDB!? later
     //main funct 2 Delete the current customers data from the current order -> can be done now
-
     //If item has been bought by current customer, add it to total of current sales period and revenue current sales period
     for (let arrayCount = 0; arrayCount < itemPrices.length; arrayCount ++) {
         if (itemPrices[arrayCount].currentCustomerCount > 0) {
             itemPrices[arrayCount].totalBoughtPeriodCount += itemPrices[arrayCount].currentCustomerCount;
             itemPrices[arrayCount].totalBoughtPeriodRevenue += itemPrices[arrayCount].price * itemPrices[arrayCount].currentCustomerCount;
-            salesPeriodTotalRevenue += itemPrices[arrayCount].totalBoughtPeriodRevenue
-            todayTotalNumber.innerHTML = 'total today : €' + salesPeriodTotalRevenue + ',-'; 
-            todayTotalNumber.innerHTML = 'Total today: €' + salesPeriodTotalRevenue + ',-'; 
+            console.log("salesPeriodTotalRevenue: " + salesPeriodTotalRevenue);
+            console.log("salesPeriodTotalRevenue: " + salesPeriodTotalRevenue);            
             console.log(itemPrices[arrayCount]);
             itemPrices[arrayCount].currentCustomerCount = 0;
             listCurrentOrders.removeChild(listCurrentOrders.firstChild);
         }
-    
     }
+    for (let arrayCount = 0; arrayCount < itemPrices.length; arrayCount ++) {
+        salesPeriodTotalRevenue += itemPrices[arrayCount].totalBoughtPeriodRevenue;
+    }
+    todayTotalNumber.innerHTML = 'total today : €' + salesPeriodTotalRevenue + ',-';    
+
     let itempricesJsonObj = JSON.stringify(itemPrices);
     localStorage.setItem("itemPricesArray", itempricesJsonObj);
     itempricesJsonObjTest = localStorage.getItem("itemPricesArray");
+    console.log(itemPrices);
 
  })
 

@@ -9,24 +9,26 @@ main {
 }
 
 button {
-    max-height: 40px;
+    max-height: 60px;
     max-width: 80px;
 }
 
 #productList{
     align-self: center;
+    justify-content: center;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    
+    width: 30%;
 }
 
 #actionButtons {
     align-self: center;
+    justify-content: center;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-
+    width: 30%;
 }
 /*
 #totaltotalSalesPeriodBox {
@@ -36,3 +38,13 @@ button {
     po
 }
     */
+
+
+
+#listDiv {
+    width: 40%;
+    margin: 0 10px 0 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
