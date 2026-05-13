@@ -223,6 +223,8 @@ addOne.addEventListener('click', () => {
 
  nextCustomer.addEventListener('click', () => {
     salesPeriodTotalRevenue = 0;
+    price = 0;
+    totalCurrentCustomer.innerHTML = '€' + price + ',-';
     //main funct 1 Add products to a list to be processed into an xml file -> how to? indexedDB!? later
     //main funct 2 Delete the current customers data from the current order -> can be done now
     //If item has been bought by current customer, add it to total of current sales period and revenue current sales period
