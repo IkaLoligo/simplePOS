@@ -1,34 +1,28 @@
 main {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    div, button {
-        width: 150px;
-        height: 74px;
-    }
+    display: grid;
+    grid-template-columns: 30% 40% 30%;
+    justify-items: center;
 }
 
 button {
-    max-height: 60px;
-    max-width: 80px;
+    height: 50px;
+    width: 80px;
 }
 
 #productList{
-    align-self: center;
-    justify-content: center;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    width: 30%;
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: 1;
+    grid-row-start: 1;    
+    justify-self: center;
 }
 
 #actionButtons {
-    align-self: center;
-    justify-content: center;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    width: 30%;
+    grid-column-start: 3;
+    grid-column-end: 4;
+    grid-row-start: 1;
+    grid-row-start: 1;
+    justify-self: center;
 }
 /*
 #totaltotalSalesPeriodBox {
@@ -42,9 +36,20 @@ button {
 
 
 #listDiv {
-    width: 40%;
-    margin: 0 10px 0 0;
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 1;
+    grid-row-start: 1;
+    justify-self: center;
+
+}
+
+#totalSalesPeriodBox {
+    grid-column-start: 1;
+    grid-column-end: 4;
+    grid-row-start: 1;
+    grid-row-start: 1;
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    flex-wrap: wrap;
+
 }

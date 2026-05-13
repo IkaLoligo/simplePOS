@@ -3,6 +3,19 @@ let selected = document.getElementById("selected")
 let todayTotalNumber = document.getElementById("todayTotalNumber")
 let totalCurrentCustomer = document.getElementById("totalCurrentCustomer")
 let listCurrentOrders = document.getElementById("listCurrentOrder")
+let arrayTotalProduct = document.getElementById("arrayTotalProducts")
+
+//contentBoxes (divs in main)
+let producList = document.getElementById("productList")
+let listDiv = document.getElementById("listDiv")
+let actionButtons = document.getElementById("actionButtons")
+let totalSalesPeriodBox = document.getElementById("totalSalesPeriodBox")
+
+//contentBoxes status (divs in main)
+    producList.hidden = false;
+    listDiv.hidden = false;
+    actionButtons.hidden = false;
+    totalSalesPeriodBox.hidden = true;
 
 // variables numbers for var text
 let totalCurrentCustomerTotal = 0;
@@ -31,6 +44,8 @@ const addOne = document.getElementById("addOne")
 const removeOne = document.getElementById("removeOne")
 const todayTotalList = document.getElementById("todayTotalList")
 const nextCustomer = document.getElementById("nextCustomer")
+const closeTotalSalesPeriodBox = document.getElementById("closeTotalSalesPeriodBox")
+closeTotalSalesPeriodBox.hidden = true;
 
 let itemPrices = [
     {
@@ -234,8 +249,32 @@ addOne.addEventListener('click', () => {
 
  })
 
- todayTotalList('click', () => {
+ todayTotalList.addEventListener('click', () => {
     //Generate pop up screen which shows all sold items + revenue + option to download data to export to spreadsheet + reset salesperiod'
+    producList.hidden = true;
+    listDiv.hidden = true;
+    actionButtons.hidden = true;
+    totalSalesPeriodBox.hidden = false;
+    closeTotalSalesPeriodBox.hidden = false;
+    arrayTotalProduct.hidden = false;
+    for (arrayCount = 0; arrayCount < itemPrices.length; arrayCount ++){
+        if (itemPrices[arrayCount].totalBoughtPeriodCount > 0) {
+        let liCreater = document.createElement("li");
+        liCreater.classList.add('liLocalStoredItemPriceArrayRestoredLi');
+        liCreater.innerText = "Name: " + itemPrices[arrayCount].name + " Total sold: " + itemPrices[arrayCount].totalBoughtPeriodCount + " Item Revenue: " + itemPrices[arrayCount].totalBoughtPeriodRevenue;
+        arrayTotalProducts.appendChild(liCreater);
+        }
+ 
+    }
+ }
+)
 
- })
+closeTotalSalesPeriodBox.addEventListener('click', () => {
+    producList.hidden = false;
+    listDiv.hidden = false;
+    actionButtons.hidden = false;
+    totalSalesPeriodBox.hidden = true;
+    closeTotalSalesPeriodBox.hidden = true;
+    arrayTotalProduct.hidden = true;
+})
  
