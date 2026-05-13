@@ -269,6 +269,43 @@ addOne.addEventListener('click', () => {
  }
 )
 
+removeOne.addEventListener('click',() => {
+    if (price >= 0) {
+        price -= itemPrices[selectedNumber].price;
+        totalCurrentCustomer.innerHTML = '€' + price + ',-';
+    }
+    else {
+        totalCurrentCustomer.innerHTML = '€' + 0 + ',-';
+    }
+
+    
+
+    //Go through itemPrices array, if itemprices.currentCustomerCount > 0,
+    //then append li with itemprices[x].name + " " + itemprices[x].currentCustomerCount
+    //else next loop iteration
+    //
+    while (listCurrentOrders.firstChild) {
+        listCurrentOrders.removeChild(listCurrentOrders.firstChild);
+    };
+    let addCountToCurrentCustomer = itemPrices[selectedNumber].currentCustomerCount;
+    if (addCountToCurrentCustomer > 0) {
+        itemPrices[selectedNumber].currentCustomerCount -=1; 
+    }
+    else {
+        itemPrices[selectedNumber].currentCustomerCount = 0;
+    }
+    console.log(itemPrices);
+    for (let arrayCount = 0; arrayCount < itemPrices.length; arrayCount ++) {
+        if (itemPrices[arrayCount].currentCustomerCount > 0) {
+            let liCreater = document.createElement("li");
+            liCreater.classList.add('liCurrentCustomerItem');
+            liCreater.innerText = itemPrices[arrayCount].name + " count = " + itemPrices[arrayCount].currentCustomerCount;
+            listCurrentOrders.appendChild(liCreater);
+        }
+
+    }
+})
+
 closeTotalSalesPeriodBox.addEventListener('click', () => {
     producList.hidden = false;
     listDiv.hidden = false;
