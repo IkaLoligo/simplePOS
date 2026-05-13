@@ -9,6 +9,9 @@ let totalCurrentCustomerTotal = 0;
 let selectedNumber = 0;
 let price = 0;
 
+//localStorage retrieval
+    let itempricesJsonObjTest = null;
+
 //buttons Products
 /* use querySelector instead of getelementById for more clarity -Maikel */
 const product1 = document.querySelector(".itemButton:nth-child(1)")
@@ -204,7 +207,7 @@ addOne.addEventListener('click', () => {
  nextCustomer.addEventListener('click', () => {
     //main funct 1 Add products to a list to be processed into an xml file -> how to? indexedDB!? later
     //main funct 2 Delete the current customers data from the current order -> can be done now
-    
+
     //If item has been bought by current customer, add it to total of current sales period and revenue current sales period
     for (let arrayCount = 0; arrayCount < itemPrices.length; arrayCount ++) {
         if (itemPrices[arrayCount].currentCustomerCount > 0) {
@@ -212,15 +215,18 @@ addOne.addEventListener('click', () => {
             itemPrices[arrayCount].totalBoughtPeriodRevenue += itemPrices[arrayCount].price * itemPrices[arrayCount].currentCustomerCount;
             console.log(itemPrices[arrayCount]);
             itemPrices[arrayCount].currentCustomerCount = 0;
+            listCurrentOrders.removeChild(listCurrentOrders.firstChild);
         }
     
     }
-    
-    
+    let itempricesJsonObj = JSON.stringify(itemPrices);
+    localStorage.setItem("itemPricesArray", itempricesJsonObj);
+    itempricesJsonObjTest = localStorage.getItem("itemPricesArray");
 
  })
 
  todayTotalList('click', () => {
-    //Generate pop up screen which shows all sold items + revenue + option to download data to export to spreadsheet + reset salesperiod
+    //Generate pop up screen which shows all sold items + revenue + option to download data to export to spreadsheet + reset salesperiod'
+
  })
  
