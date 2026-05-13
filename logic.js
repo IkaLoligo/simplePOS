@@ -8,6 +8,7 @@ let listCurrentOrders = document.getElementById("listCurrentOrder")
 let totalCurrentCustomerTotal = 0;
 let selectedNumber = 0;
 let price = 0;
+let salesPeriodTotalRevenue = 0;
 
 //localStorage retrieval
     let itempricesJsonObjTest = null;
@@ -213,6 +214,9 @@ addOne.addEventListener('click', () => {
         if (itemPrices[arrayCount].currentCustomerCount > 0) {
             itemPrices[arrayCount].totalBoughtPeriodCount += itemPrices[arrayCount].currentCustomerCount;
             itemPrices[arrayCount].totalBoughtPeriodRevenue += itemPrices[arrayCount].price * itemPrices[arrayCount].currentCustomerCount;
+            salesPeriodTotalRevenue += itemPrices[arrayCount].totalBoughtPeriodRevenue
+            todayTotalNumber.innerHTML = 'total today : €' + salesPeriodTotalRevenue + ',-'; 
+            todayTotalNumber.innerHTML = 'Total today: €' + salesPeriodTotalRevenue + ',-'; 
             console.log(itemPrices[arrayCount]);
             itemPrices[arrayCount].currentCustomerCount = 0;
             listCurrentOrders.removeChild(listCurrentOrders.firstChild);

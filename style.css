@@ -8,7 +8,10 @@ main {
     }
 }
 
-
+button {
+    max-height: 40px;
+    max-width: 80px;
+}
 
 #productList{
     align-self: center;
