@@ -1,32 +1,40 @@
-// Variable text 
+// Variable text order control
 let selected = document.getElementById("selected")
 let todayTotalNumber = document.getElementById("todayTotalNumber")
 let totalCurrentCustomer = document.getElementById("totalCurrentCustomer")
+
+// Variable text orderListBox
 let listCurrentOrders = document.getElementById("listCurrentOrder")
+
+// Variable text Today's total list box
 let arrayTotalProduct = document.getElementById("arrayTotalProducts")
 
+
 //contentBoxes (divs in main)
-let producList = document.getElementById("productList")
-let listDiv = document.getElementById("listDiv")
-let actionButtons = document.getElementById("actionButtons")
+let productButtonBox = document.getElementById("productButtonBox")
+let orderListBox = document.getElementById("orderListBox")
+let orderControlBox = document.getElementById("orderControlBox")
 let totalSalesPeriodBox = document.getElementById("totalSalesPeriodBox")
 
 //contentBoxes status (divs in main)
-    producList.hidden = false;
-    listDiv.hidden = false;
-    actionButtons.hidden = false;
+    productButtonBox.hidden = false;
+    orderListBox.hidden = false;
+    orderControlBox.hidden = false;
     totalSalesPeriodBox.hidden = true;
 
-// variables numbers for var text
-let totalCurrentCustomerTotal = 0;
-let selectedNumber = 0;
+// variables numbers for var text --Rework needed, see if stuff is redundant!
+
+// || v Needed know which item button has been pressed, number correspondts to itemPrice array index v ||
+let selectedNumber = 0; 
+// Vague, name change needed. Is used to showcase current total for current customer.
 let price = 0;
+// Clear, used to showcase sales period total revenue
 let salesPeriodTotalRevenue = 0;
 
-//localStorage retrieval
+//localStorage retrieval null
     let itempricesJsonObjTest = null;
 
-//buttons Products
+//buttons Products Might be good to turn into objects and be put in an array for scaleability
 /* use querySelector instead of getelementById for more clarity -Maikel */
 const product1 = document.querySelector(".itemButton:nth-child(1)")
 const product2 = document.querySelector(".itemButton:nth-child(2)")
@@ -39,7 +47,7 @@ const product8 = document.querySelector(".itemButton:nth-child(8)")
 const product9 = document.querySelector(".itemButton:nth-child(9)")
 const product10 = document.querySelector(".itemButton:nth-child(10)")
 
-//buttons manipulators
+//orderControlBox buttons 
 const addOne = document.getElementById("addOne")
 const removeOne = document.getElementById("removeOne")
 const todayTotalList = document.getElementById("todayTotalList")
@@ -253,9 +261,9 @@ addOne.addEventListener('click', () => {
 
  todayTotalList.addEventListener('click', () => {
     //Generate pop up screen which shows all sold items + revenue + option to download data to export to spreadsheet + reset salesperiod'
-    producList.hidden = true;
-    listDiv.hidden = true;
-    actionButtons.hidden = true;
+    productButtonBox.hidden = true;
+    orderListBox.hidden = true;
+    orderControlBox.hidden = true;
     totalSalesPeriodBox.hidden = false;
     closeTotalSalesPeriodBox.hidden = false;
     arrayTotalProduct.hidden = false;
@@ -309,9 +317,9 @@ removeOne.addEventListener('click',() => {
 })
 
 closeTotalSalesPeriodBox.addEventListener('click', () => {
-    producList.hidden = false;
-    listDiv.hidden = false;
-    actionButtons.hidden = false;
+    productButtonBox.hidden = false;
+    orderListBox.hidden = false;
+    orderControlBox.hidden = false;
     totalSalesPeriodBox.hidden = true;
     closeTotalSalesPeriodBox.hidden = true;
     arrayTotalProduct.hidden = true;
