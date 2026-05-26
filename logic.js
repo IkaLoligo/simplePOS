@@ -36,6 +36,7 @@ let salesPeriodTotalRevenue = 0;
 
 //buttons Products Might be good to turn into objects and be put in an array for scaleability
 /* use querySelector instead of getelementById for more clarity -Maikel */
+/* query selector all */
 const product1 = document.querySelector(".itemButton:nth-child(1)")
 const product2 = document.querySelector(".itemButton:nth-child(2)")
 const product3 = document.querySelector(".itemButton:nth-child(3)")
