@@ -4,14 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>localPOS</title>
-    <script src="logic.js" defer></script>
     <link rel="stylesheet" href="style.css">
-
+    <script src="logic.js" defer></script>
 </head>
 <body>
     <main>
         <!--Product buttons-->
-        <div id="productButtonBox">
+        <div class="productButtonBox" id="productButtonBox">
             <button class="itemButton">
                 Sticker
             </button>
@@ -24,7 +23,7 @@
             <button class="itemButton">
                 Eevee Roll
             </button>
-            <button class="itemButton">
+            <button class="itemButton"> 
                 Phone Charm
             </button>
             <button class="itemButton">
@@ -46,27 +45,33 @@
 
         <!--List curremt order-->
         <div id="orderListBox">
+            <h2 id="h2OrderListBox">Order list</h2>
             <ul id="listCurrentOrder">
                 
             </ul>
         </div>
         <!--List manipulator buttons-->
-        <div id="orderControlBox">
-            <div>
+        <div class="orderControlBox" id="orderControlBox">
+            <div id="selectedDiv">
                 <p id="selected">
                     None selected
                 </p>
            </div>           
-           <button Id="addOne">
+           <button id="addOne">
               Add one
            </button>
            <button id="removeOne">
                 Remove one
            </button>
 
-           <button id="nextCustomer">
-                Next customer
-           </button>
+           <button id="addFive">+5</button>
+           <button id="addTen">+10</button>
+           <button id="clearSelectedItem">Clear selected Item</button>
+           <button id="clearBasket">Clear all items</button>
+           <button id="payByCash">Pay by cash</button>
+           <button id="payByCard">Pay by card</button>
+           <button id="viewTotalToday">View total today</button>
+           <button id="viewTotalConvetion">View total Convention</button>
            <div>
                 <p id="totalCurrentCustomer">
                     Total current customer: 0,-
@@ -77,8 +82,8 @@
                     Total today: €0,-
                 </p>
            </div>
-           <button id="todayTotalList">
-                View today's list
+           <button id="endDay">
+                End the day
            </button>
         </div>
 
