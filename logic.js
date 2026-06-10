@@ -58,80 +58,16 @@ const viewTotalToday = document.getElementById("viewTotalToday")
 const viewTotalConvention = document.getElementById("viewTotalConvention")
 const endDay = document.getElementById("endDay")
 
+//constructor for sale object
+function sale (id, type, ammount) {
+    this.id = id;
+    this.type = type;
+    this.ammount = ammount;
+}
 
-let itemPrices = [
-    {
-        name:"sticker",
-        price: 2,
-        currentCustomerCount: 0,
-        totalBoughtPeriodCount: 0,
-        totalBoughtPeriodRevenue: 0,
-    },
-    {
-        name:"sticker Merlijn",
-        price: 2,
-        currentCustomerCount: 0,    
-        totalBoughtPeriodCount: 0,
-        totalBoughtPeriodRevenue: 0,    
-    },
-    {
-        name:"keychain",
-        price: 8,
-        currentCustomerCount: 0,
-        totalBoughtPeriodCount: 0,
-        totalBoughtPeriodRevenue: 0,
-    },
-        {
-        name:"Eevee Roll",
-        price: 3,
-        currentCustomerCount: 0,
-        totalBoughtPeriodCount: 0,
-        totalBoughtPeriodRevenue: 0,
-    },
-    {
-        name:"Phone Charm",
-        price: 5,
-        currentCustomerCount: 0,
-        totalBoughtPeriodCount: 0,
-        totalBoughtPeriodRevenue: 0,
-    },
-    {
-        name:"Mystery Bag",
-        price: 8,
-        currentCustomerCount: 0,
-        totalBoughtPeriodCount: 0,
-        totalBoughtPeriodRevenue: 0,
-    },
-    {
-        name:"pkm bag",
-        price: 20,
-        currentCustomerCount: 0,
-        totalBoughtPeriodCount: 0,
-        totalBoughtPeriodRevenue: 0,
-    },
-    {
-        name:"hand fans",
-        price: 5,
-        currentCustomerCount: 0,
-        totalBoughtPeriodCount: 0,
-        totalBoughtPeriodRevenue: 0,
-    },
-    {
-        name:"Pipi",
-        price: 18,
-        currentCustomerCount: 0,
-        totalBoughtPeriodCount: 0,
-        totalBoughtPeriodRevenue: 0,
-    },
-    {
-        name:"Stickerbook",
-        price: 15,
-        currentCustomerCount: 0,
-        totalBoughtPeriodCount: 0,
-        totalBoughtPeriodRevenue: 0,
-    },
-]
-
+let salesStored = JSON.parse(localStorage.getItem('sales'));
+let itemsStored = JSON.parse(localStorage.getItem('items'));
+console.log(itemsStored)
 
 //select product logic
 product1.addEventListener('click', () => {
@@ -202,41 +138,41 @@ product10.addEventListener('click', () => {
 
 //Add one logic
 addOne.addEventListener('click', () => {
-    price += itemPrices[selectedNumber].price;
+    price += itemsStored[selectedNumber].price;
     totalCurrentCustomer.innerHTML = '€' + price + ',-';
     
 
-    //Go through itemPrices array, if itemprices.currentCustomerCount > 0,
-    //then append li with itemprices[x].name + " " + itemprices[x].currentCustomerCount
+    //Go through itemsStored array, if itemsStored.currentCustomerCount > 0,
+    //then append li with itemsStored[x].name + " " + itemsStored[x].currentCustomerCount
     //else next loop iteration
     //
     while (listCurrentOrders.firstChild) {
         listCurrentOrders.removeChild(listCurrentOrders.firstChild);
     };
 
-    let addCountToCurrentCustomer = itemPrices[selectedNumber].currentCustomerCount +=1;
-    console.log(itemPrices);
-    for (let arrayCount = 0; arrayCount < itemPrices.length; arrayCount ++) {
-        if (itemPrices[arrayCount].currentCustomerCount > 0) {
+    let addCountToCurrentCustomer = itemsStored[selectedNumber].currentCustomerCount +=1;
+    console.log(itemsStored);
+    for (let arrayCount = 0; arrayCount < itemsStored.length; arrayCount ++) {
+        if (itemsStored[arrayCount].currentCustomerCount > 0) {
             let liCreater = document.createElement("li");
             liCreater.classList.add('liCurrentCustomerItem');
-            liCreater.innerText = itemPrices[arrayCount].name + " count = " + itemPrices[arrayCount].currentCustomerCount;
+            liCreater.innerText = itemsStored[arrayCount].name + " count = " + itemsStored[arrayCount].currentCustomerCount;
             listCurrentOrders.appendChild(liCreater);
         }
 
     }
-    console.log(itemPrices);
+    console.log(itemsStored);
     
 
 
-    console.log(itemPrices[selectedNumber].currentCustomerCount);
+    console.log(itemsStored[selectedNumber].currentCustomerCount);
     
 })
 
 
 removeOne.addEventListener('click',() => {
-    if (price > 0 && itemPrices[selectedNumber].currentCustomerCount > 0 ) {
-        price -= itemPrices[selectedNumber].price;
+    if (price > 0 && itemsStored[selectedNumber].currentCustomerCount > 0 ) {
+        price -= itemsStored[selectedNumber].price;
         totalCurrentCustomer.innerHTML = '€' + price + ',-';
     }
     else {
@@ -245,26 +181,26 @@ removeOne.addEventListener('click',() => {
 
     
 
-    //Go through itemPrices array, if itemprices.currentCustomerCount > 0,
-    //then append li with itemprices[x].name + " " + itemprices[x].currentCustomerCount
+    //Go through itemsStored array, if itemsStored.currentCustomerCount > 0,
+    //then append li with itemsStored[x].name + " " + itemsStored[x].currentCustomerCount
     //else next loop iteration
     //
     while (listCurrentOrders.firstChild) {
         listCurrentOrders.removeChild(listCurrentOrders.firstChild);
     };
-    let addCountToCurrentCustomer = itemPrices[selectedNumber].currentCustomerCount;
+    let addCountToCurrentCustomer = itemsStored[selectedNumber].currentCustomerCount;
     if (addCountToCurrentCustomer > 0) {
-        itemPrices[selectedNumber].currentCustomerCount -=1; 
+        itemsStored[selectedNumber].currentCustomerCount -=1; 
     }
     else {
-        itemPrices[selectedNumber].currentCustomerCount = 0;
+        itemsStored[selectedNumber].currentCustomerCount = 0;
     }
-    console.log(itemPrices);
-    for (let arrayCount = 0; arrayCount < itemPrices.length; arrayCount ++) {
-        if (itemPrices[arrayCount].currentCustomerCount > 0) {
+    console.log(itemsStored);
+    for (let arrayCount = 0; arrayCount < itemsStored.length; arrayCount ++) {
+        if (itemsStored[arrayCount].currentCustomerCount > 0) {
             let liCreater = document.createElement("li");
             liCreater.classList.add('liCurrentCustomerItem');
-            liCreater.innerText = itemPrices[arrayCount].name + " count = " + itemPrices[arrayCount].currentCustomerCount;
+            liCreater.innerText = itemsStored[arrayCount].name + " count = " + itemsStored[arrayCount].currentCustomerCount;
             listCurrentOrders.appendChild(liCreater);
         }
 
@@ -273,64 +209,64 @@ removeOne.addEventListener('click',() => {
 
 
 addFive.addEventListener('click',() =>{
-    price += itemPrices[selectedNumber].price * 5;
+    price += itemsStored[selectedNumber].price * 5;
     totalCurrentCustomer.innerHTML = '€' + price + ',-';
     
 
-    //Go through itemPrices array, if itemprices.currentCustomerCount > 0,
-    //then append li with itemprices[x].name + " " + itemprices[x].currentCustomerCount
+    //Go through itemsStored array, if itemsStored.currentCustomerCount > 0,
+    //then append li with itemsStored[x].name + " " + itemsStored[x].currentCustomerCount
     //else next loop iteration
     //
     while (listCurrentOrders.firstChild) {
         listCurrentOrders.removeChild(listCurrentOrders.firstChild);
     };
 
-    let addCountToCurrentCustomer = itemPrices[selectedNumber].currentCustomerCount +=5;
-    console.log(itemPrices);
-    for (let arrayCount = 0; arrayCount < itemPrices.length; arrayCount ++) {
-        if (itemPrices[arrayCount].currentCustomerCount > 0) {
+    let addCountToCurrentCustomer = itemsStored[selectedNumber].currentCustomerCount +=5;
+    console.log(itemsStored);
+    for (let arrayCount = 0; arrayCount < itemsStored.length; arrayCount ++) {
+        if (itemsStored[arrayCount].currentCustomerCount > 0) {
             let liCreater = document.createElement("li");
             liCreater.classList.add('liCurrentCustomerItem');
-            liCreater.innerText = itemPrices[arrayCount].name + " count = " + itemPrices[arrayCount].currentCustomerCount;
+            liCreater.innerText = itemsStored[arrayCount].name + " count = " + itemsStored[arrayCount].currentCustomerCount;
             listCurrentOrders.appendChild(liCreater);
         }
 
     }
-    console.log(itemPrices);
+    console.log(itemsStored);
     
 
 
-    console.log(itemPrices[selectedNumber].currentCustomerCount);
+    console.log(itemsStored[selectedNumber].currentCustomerCount);
     
 })
 
 addTen.addEventListener('click',() =>{
-    price += itemPrices[selectedNumber].price * 10;
+    price += itemsStored[selectedNumber].price * 10;
     totalCurrentCustomer.innerHTML = '€' + price + ',-';
     
 
-    //Go through itemPrices array, if itemprices.currentCustomerCount > 0,
-    //then append li with itemprices[x].name + " " + itemprices[x].currentCustomerCount
+    //Go through itemsStored array, if itemsStored.currentCustomerCount > 0,
+    //then append li with itemsStored[x].name + " " + itemsStored[x].currentCustomerCount
     //else next loop iteration
     //
 
 
-    let addCountToCurrentCustomer = itemPrices[selectedNumber].currentCustomerCount +=10;
-    console.log(itemPrices);
-    for (let arrayCount = 0; arrayCount < itemPrices.length; arrayCount ++) {
-        if (itemPrices[arrayCount].currentCustomerCount > 0) {
+    let addCountToCurrentCustomer = itemsStored[selectedNumber].currentCustomerCount +=10;
+    console.log(itemsStored);
+    for (let arrayCount = 0; arrayCount < itemsStored.length; arrayCount ++) {
+        if (itemsStored[arrayCount].currentCustomerCount > 0) {
             let liCreater = document.createElement("li");
             liCreater.classList.add('liCurrentCustomerItem');
-            liCreater.innerText = itemPrices[arrayCount].name + " count = " + itemPrices[arrayCount].currentCustomerCount;
+            liCreater.innerText = itemsStored[arrayCount].name + " count = " + itemsStored[arrayCount].currentCustomerCount;
             listCurrentOrders.appendChild(liCreater);
         }
 
     }
-    console.log(itemPrices);
+    console.log(itemsStored);
     
 
 
-    console.log(itemPrices[selectedNumber].currentCustomerCount);
+    console.log(itemsStored[selectedNumber].currentCustomerCount);
 
     
 })
@@ -341,15 +277,15 @@ clearSelectedItem.addEventListener('click', () => {
         listCurrentOrders.removeChild(listCurrentOrders.firstChild);
     };
 
-    price -= itemPrices[selectedNumber].currentCustomerCount * itemPrices[selectedNumber].price;
-    itemPrices[selectedNumber].currentCustomerCount = 0;
+    price -= itemsStored[selectedNumber].currentCustomerCount * itemsStored[selectedNumber].price;
+    itemsStored[selectedNumber].currentCustomerCount = 0;
     totalCurrentCustomer.innerHTML = '€' + price + ',-';
     
-    for (let arrayCount = 0; arrayCount < itemPrices.length; arrayCount ++) {
-        if (itemPrices[arrayCount].currentCustomerCount > 0) {
+    for (let arrayCount = 0; arrayCount < itemsStored.length; arrayCount ++) {
+        if (itemsStored[arrayCount].currentCustomerCount > 0) {
             let liCreater = document.createElement("li");
             liCreater.classList.add('liCurrentCustomerItem');
-            liCreater.innerText = itemPrices[arrayCount].name + " count = " + itemPrices[arrayCount].currentCustomerCount;
+            liCreater.innerText = itemsStored[arrayCount].name + " count = " + itemsStored[arrayCount].currentCustomerCount;
             listCurrentOrders.appendChild(liCreater);
         }
 
@@ -364,10 +300,10 @@ clearBasket.addEventListener('click', () => {
     price = 0;
     totalCurrentCustomer.innerHTML = '€' + price + ',-';
 
-    for (let arrayCount = 0; arrayCount < itemPrices.length; arrayCount ++) {
-        if (itemPrices[arrayCount].currentCustomerCount > 0) {
-            itemPrices[arrayCount].currentCustomerCount = 0};
-            console.log(itemPrices[arrayCount].currentCustomerCount);
+    for (let arrayCount = 0; arrayCount < itemsStored.length; arrayCount ++) {
+        if (itemsStored[arrayCount].currentCustomerCount > 0) {
+            itemsStored[arrayCount].currentCustomerCount = 0};
+            console.log(itemsStored[arrayCount].currentCustomerCount);
     } 
 })
 
@@ -375,8 +311,116 @@ clearBasket.addEventListener('click', () => {
 
 //funct for pay by cash
 
-//funct for pay by card
+payByCash.addEventListener('click', () => {
+    let newId = 0;
+    let newType = 'null';
+    let newAmmount = 0;
+    let newSale = null;
+    let salesSavedLocally = 0;
 
+    if (salesStored[0] === undefined) {
+        newId = 1;
+        newType = 'cash';
+        newAmmount = price;
+        newSale = new sale(newId, newType, newAmmount);
+        salesStored.push(newSale);
+        salesSavedLocally = JSON.stringify(salesStored);
+        localStorage.setItem('sales', salesSavedLocally)
+        
+        while (listCurrentOrders.firstChild) {
+            listCurrentOrders.removeChild(listCurrentOrders.firstChild);
+        };
+
+        price = 0;
+        totalCurrentCustomer.innerHTML = '€' + price + ',-';
+
+        for (let arrayCount = 0; arrayCount < itemsStored.length; arrayCount ++) {
+            if (itemsStored[arrayCount].currentCustomerCount > 0) {
+                itemsStored[arrayCount].currentCustomerCount = 0};
+                console.log(itemsStored[arrayCount].currentCustomerCount);
+        } 
+        
+    }
+    else {
+        newId = salesStored.length + 1;
+        newType = 'cash';
+        newAmmount = price;
+        newSale = new sale(newId, newType, newAmmount);
+        salesStored.push(newSale);
+        console.log(salesStored)
+        salesSavedLocally = JSON.stringify(salesStored);
+        localStorage.setItem('sales', salesSavedLocally)
+        while (listCurrentOrders.firstChild) {
+            listCurrentOrders.removeChild(listCurrentOrders.firstChild);
+        };
+
+        price = 0;
+        totalCurrentCustomer.innerHTML = '€' + price + ',-';
+
+        for (let arrayCount = 0; arrayCount < itemsStored.length; arrayCount ++) {
+            if (itemsStored[arrayCount].currentCustomerCount > 0) {
+                itemsStored[arrayCount].currentCustomerCount = 0};
+                console.log(itemsStored[arrayCount].currentCustomerCount);
+        } 
+    }
+
+})
+
+//funct for pay by card
+payByCard.addEventListener('click', () => {
+    let newId = 0;
+    let newType = 'null';
+    let newAmmount = 0;
+    let newSale = null;
+    let salesSavedLocally = 0;
+
+    if (salesStored[0] === undefined) {
+        newId = 1;
+        newType = 'card';
+        newAmmount = price;
+        newSale = new sale(newId, newType, newAmmount);
+        salesStored.push(newSale);
+        salesSavedLocally = JSON.stringify(salesStored);
+        localStorage.setItem('sales', salesSavedLocally)
+        
+        while (listCurrentOrders.firstChild) {
+            listCurrentOrders.removeChild(listCurrentOrders.firstChild);
+        };
+
+        price = 0;
+        totalCurrentCustomer.innerHTML = '€' + price + ',-';
+
+        for (let arrayCount = 0; arrayCount < itemsStored.length; arrayCount ++) {
+            if (itemsStored[arrayCount].currentCustomerCount > 0) {
+                itemsStored[arrayCount].currentCustomerCount = 0};
+                console.log(itemsStored[arrayCount].currentCustomerCount);
+        } 
+        
+    }
+    else {
+        newId = salesStored.length + 1;
+        newType = 'card';
+        newAmmount = price;
+        newSale = new sale(newId, newType, newAmmount);
+        salesStored.push(newSale);
+        console.log(salesStored)
+        salesSavedLocally = JSON.stringify(salesStored);
+        localStorage.setItem('sales', salesSavedLocally)
+        while (listCurrentOrders.firstChild) {
+            listCurrentOrders.removeChild(listCurrentOrders.firstChild);
+        };
+
+        price = 0;
+        totalCurrentCustomer.innerHTML = '€' + price + ',-';
+
+        for (let arrayCount = 0; arrayCount < itemsStored.length; arrayCount ++) {
+            if (itemsStored[arrayCount].currentCustomerCount > 0) {
+                itemsStored[arrayCount].currentCustomerCount = 0};
+                console.log(itemsStored[arrayCount].currentCustomerCount);
+        } 
+    }
+
+})
 //view total today
 
 //view total convention
@@ -387,26 +431,26 @@ nextCustomer.addEventListener('click', () => {
     //main funct 1 Add products to a list to be processed into an xml file -> how to? indexedDB!? later
     //main funct 2 Delete the current customers data from the current order -> can be done now
     //If item has been bought by current customer, add it to total of current sales period and revenue current sales period
-    for (let arrayCount = 0; arrayCount < itemPrices.length; arrayCount ++) {
-        if (itemPrices[arrayCount].currentCustomerCount > 0) {
-            itemPrices[arrayCount].totalBoughtPeriodCount += itemPrices[arrayCount].currentCustomerCount;
-            itemPrices[arrayCount].totalBoughtPeriodRevenue += itemPrices[arrayCount].price * itemPrices[arrayCount].currentCustomerCount;
+    for (let arrayCount = 0; arrayCount < itemsStored.length; arrayCount ++) {
+        if (itemsStored[arrayCount].currentCustomerCount > 0) {
+            itemsStored[arrayCount].totalBoughtPeriodCount += itemsStored[arrayCount].currentCustomerCount;
+            itemsStored[arrayCount].totalBoughtPeriodRevenue += itemsStored[arrayCount].price * itemsStored[arrayCount].currentCustomerCount;
             console.log("salesPeriodTotalRevenue: " + salesPeriodTotalRevenue);
             console.log("salesPeriodTotalRevenue: " + salesPeriodTotalRevenue);            
-            console.log(itemPrices[arrayCount]);
-            itemPrices[arrayCount].currentCustomerCount = 0;
+            console.log(itemsStored[arrayCount]);
+            itemsStored[arrayCount].currentCustomerCount = 0;
             listCurrentOrders.removeChild(listCurrentOrders.firstChild);
         }
     }
-    for (let arrayCount = 0; arrayCount < itemPrices.length; arrayCount ++) {
-        salesPeriodTotalRevenue += itemPrices[arrayCount].totalBoughtPeriodRevenue;
+    for (let arrayCount = 0; arrayCount < itemsStored.length; arrayCount ++) {
+        salesPeriodTotalRevenue += itemsStored[arrayCount].totalBoughtPeriodRevenue;
     }
     todayTotalNumber.innerHTML = 'total today : €' + salesPeriodTotalRevenue + ',-';    
 
-    let itempricesJsonObj = JSON.stringify(itemPrices);
+    let itempricesJsonObj = JSON.stringify(itemsStored);
     localStorage.setItem("itemPricesArray", itempricesJsonObj);
     itempricesJsonObjTest = localStorage.getItem("itemPricesArray");
-    console.log(itemPrices);
+    console.log(itemsStored);
 
  })
 
@@ -418,11 +462,11 @@ nextCustomer.addEventListener('click', () => {
     totalSalesPeriodBox.style.display = "flex";
     closeTotalSalesPeriodBox.hidden = false;
     arrayTotalProduct.hidden = false;
-    for (arrayCount = 0; arrayCount < itemPrices.length; arrayCount ++){
-        if (itemPrices[arrayCount].totalBoughtPeriodCount > 0) {
+    for (arrayCount = 0; arrayCount < itemsStored.length; arrayCount ++){
+        if (itemsStored[arrayCount].totalBoughtPeriodCount > 0) {
         let liCreater = document.createElement("li");
         liCreater.classList.add('liLocalStoredItemPriceArrayRestoredLi');
-        liCreater.innerText = "Name: " + itemPrices[arrayCount].name + " Total sold: " + itemPrices[arrayCount].totalBoughtPeriodCount + " Item Revenue: " + itemPrices[arrayCount].totalBoughtPeriodRevenue;
+        liCreater.innerText = "Name: " + itemsStored[arrayCount].name + " Total sold: " + itemsStored[arrayCount].totalBoughtPeriodCount + " Item Revenue: " + itemsStored[arrayCount].totalBoughtPeriodRevenue;
         arrayTotalProducts.appendChild(liCreater);
         }
  
