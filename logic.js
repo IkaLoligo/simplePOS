@@ -198,7 +198,7 @@ product10.addEventListener('click', () => {
 })
 
 
-console.log("hallo",product1)
+
 
 //Add one logic
 addOne.addEventListener('click', () => {
@@ -313,9 +313,7 @@ addTen.addEventListener('click',() =>{
     //then append li with itemprices[x].name + " " + itemprices[x].currentCustomerCount
     //else next loop iteration
     //
-    while (listCurrentOrders.firstChild) {
-        listCurrentOrders.removeChild(listCurrentOrders.firstChild);
-    };
+
 
     let addCountToCurrentCustomer = itemPrices[selectedNumber].currentCustomerCount +=10;
     console.log(itemPrices);
@@ -333,12 +331,18 @@ addTen.addEventListener('click',() =>{
 
 
     console.log(itemPrices[selectedNumber].currentCustomerCount);
+
     
 })
 
 clearSelectedItem.addEventListener('click', () => {
     
+    while (listCurrentOrders.firstChild) {
+        listCurrentOrders.removeChild(listCurrentOrders.firstChild);
+    };
 
+    itemPrices[selectedNumber].currentCustomerCount = 0;
+    
     for (let arrayCount = 0; arrayCount < itemPrices.length; arrayCount ++) {
         if (itemPrices[arrayCount].currentCustomerCount > 0) {
             let liCreater = document.createElement("li");
@@ -347,7 +351,7 @@ clearSelectedItem.addEventListener('click', () => {
             listCurrentOrders.appendChild(liCreater);
         }
 
-    }
+    }    
 })
 
 nextCustomer.addEventListener('click', () => {
