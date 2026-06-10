@@ -371,6 +371,15 @@ clearBasket.addEventListener('click', () => {
     } 
 })
 
+//need data base for this!
+
+//funct for pay by cash
+
+//funct for pay by card
+
+//view total today
+
+//view total convention
 nextCustomer.addEventListener('click', () => {
     salesPeriodTotalRevenue = 0;
     price = 0;
