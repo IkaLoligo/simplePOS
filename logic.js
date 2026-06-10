@@ -17,10 +17,7 @@ let orderControlBox = document.getElementById("orderControlBox")
 let totalSalesPeriodBox = document.getElementById("totalSalesPeriodBox")
 
 //contentBoxes status (divs in main)
-    productButtonBox.hidden = false;
-    orderListBox.hidden = false;
-    orderControlBox.hidden = false;
-    totalSalesPeriodBox.hidden = true;
+    totalSalesPeriodBox.style.display = "none";
 
 // variables numbers for var text --Rework needed, see if stuff is redundant!
 
@@ -51,10 +48,16 @@ const product10 = document.querySelector(".itemButton:nth-child(10)")
 //orderControlBox buttons 
 const addOne = document.getElementById("addOne")
 const removeOne = document.getElementById("removeOne")
-const todayTotalList = document.getElementById("todayTotalList")
-const nextCustomer = document.getElementById("nextCustomer")
-const closeTotalSalesPeriodBox = document.getElementById("closeTotalSalesPeriodBox")
-closeTotalSalesPeriodBox.hidden = true;
+const addFive = document.getElementById("addFive")
+const addTen = document.getElementById("addTen");
+const clearSelectedItem = document.getElementById("clearSelectedItem")
+const clearBasket = document.getElementById("clearBasket")
+const payByCash = document.getElementById("payByCash");
+const payByCard = document.getElementById("payByCard")
+const viewTotalToday = document.getElementById("viewTotalToday")
+const viewTotalConvention = document.getElementById("viewTotalConvention")
+const endDay = document.getElementById("endDay")
+
 
 let itemPrices = [
     {
@@ -230,58 +233,9 @@ addOne.addEventListener('click', () => {
     
 })
 
- nextCustomer.addEventListener('click', () => {
-    salesPeriodTotalRevenue = 0;
-    price = 0;
-    totalCurrentCustomer.innerHTML = '€' + price + ',-';
-    //main funct 1 Add products to a list to be processed into an xml file -> how to? indexedDB!? later
-    //main funct 2 Delete the current customers data from the current order -> can be done now
-    //If item has been bought by current customer, add it to total of current sales period and revenue current sales period
-    for (let arrayCount = 0; arrayCount < itemPrices.length; arrayCount ++) {
-        if (itemPrices[arrayCount].currentCustomerCount > 0) {
-            itemPrices[arrayCount].totalBoughtPeriodCount += itemPrices[arrayCount].currentCustomerCount;
-            itemPrices[arrayCount].totalBoughtPeriodRevenue += itemPrices[arrayCount].price * itemPrices[arrayCount].currentCustomerCount;
-            console.log("salesPeriodTotalRevenue: " + salesPeriodTotalRevenue);
-            console.log("salesPeriodTotalRevenue: " + salesPeriodTotalRevenue);            
-            console.log(itemPrices[arrayCount]);
-            itemPrices[arrayCount].currentCustomerCount = 0;
-            listCurrentOrders.removeChild(listCurrentOrders.firstChild);
-        }
-    }
-    for (let arrayCount = 0; arrayCount < itemPrices.length; arrayCount ++) {
-        salesPeriodTotalRevenue += itemPrices[arrayCount].totalBoughtPeriodRevenue;
-    }
-    todayTotalNumber.innerHTML = 'total today : €' + salesPeriodTotalRevenue + ',-';    
-
-    let itempricesJsonObj = JSON.stringify(itemPrices);
-    localStorage.setItem("itemPricesArray", itempricesJsonObj);
-    itempricesJsonObjTest = localStorage.getItem("itemPricesArray");
-    console.log(itemPrices);
-
- })
-
- todayTotalList.addEventListener('click', () => {
-    //Generate pop up screen which shows all sold items + revenue + option to download data to export to spreadsheet + reset salesperiod'
-    productButtonBox.hidden = true;
-    orderListBox.hidden = true;
-    orderControlBox.hidden = true;
-    totalSalesPeriodBox.hidden = false;
-    closeTotalSalesPeriodBox.hidden = false;
-    arrayTotalProduct.hidden = false;
-    for (arrayCount = 0; arrayCount < itemPrices.length; arrayCount ++){
-        if (itemPrices[arrayCount].totalBoughtPeriodCount > 0) {
-        let liCreater = document.createElement("li");
-        liCreater.classList.add('liLocalStoredItemPriceArrayRestoredLi');
-        liCreater.innerText = "Name: " + itemPrices[arrayCount].name + " Total sold: " + itemPrices[arrayCount].totalBoughtPeriodCount + " Item Revenue: " + itemPrices[arrayCount].totalBoughtPeriodRevenue;
-        arrayTotalProducts.appendChild(liCreater);
-        }
- 
-    }
- }
-)
 
 removeOne.addEventListener('click',() => {
-    if (price >= 0) {
+    if (price > 0) {
         price -= itemPrices[selectedNumber].price;
         totalCurrentCustomer.innerHTML = '€' + price + ',-';
     }
@@ -317,9 +271,139 @@ removeOne.addEventListener('click',() => {
     }
 })
 
+
+addFive.addEventListener('click',() =>{
+    price += itemPrices[selectedNumber].price * 5;
+    totalCurrentCustomer.innerHTML = '€' + price + ',-';
+    
+
+    //Go through itemPrices array, if itemprices.currentCustomerCount > 0,
+    //then append li with itemprices[x].name + " " + itemprices[x].currentCustomerCount
+    //else next loop iteration
+    //
+    while (listCurrentOrders.firstChild) {
+        listCurrentOrders.removeChild(listCurrentOrders.firstChild);
+    };
+
+    let addCountToCurrentCustomer = itemPrices[selectedNumber].currentCustomerCount +=5;
+    console.log(itemPrices);
+    for (let arrayCount = 0; arrayCount < itemPrices.length; arrayCount ++) {
+        if (itemPrices[arrayCount].currentCustomerCount > 0) {
+            let liCreater = document.createElement("li");
+            liCreater.classList.add('liCurrentCustomerItem');
+            liCreater.innerText = itemPrices[arrayCount].name + " count = " + itemPrices[arrayCount].currentCustomerCount;
+            listCurrentOrders.appendChild(liCreater);
+        }
+
+    }
+    console.log(itemPrices);
+    
+
+
+    console.log(itemPrices[selectedNumber].currentCustomerCount);
+    
+})
+
+addTen.addEventListener('click',() =>{
+    price += itemPrices[selectedNumber].price * 10;
+    totalCurrentCustomer.innerHTML = '€' + price + ',-';
+    
+
+    //Go through itemPrices array, if itemprices.currentCustomerCount > 0,
+    //then append li with itemprices[x].name + " " + itemprices[x].currentCustomerCount
+    //else next loop iteration
+    //
+    while (listCurrentOrders.firstChild) {
+        listCurrentOrders.removeChild(listCurrentOrders.firstChild);
+    };
+
+    let addCountToCurrentCustomer = itemPrices[selectedNumber].currentCustomerCount +=10;
+    console.log(itemPrices);
+    for (let arrayCount = 0; arrayCount < itemPrices.length; arrayCount ++) {
+        if (itemPrices[arrayCount].currentCustomerCount > 0) {
+            let liCreater = document.createElement("li");
+            liCreater.classList.add('liCurrentCustomerItem');
+            liCreater.innerText = itemPrices[arrayCount].name + " count = " + itemPrices[arrayCount].currentCustomerCount;
+            listCurrentOrders.appendChild(liCreater);
+        }
+
+    }
+    console.log(itemPrices);
+    
+
+
+    console.log(itemPrices[selectedNumber].currentCustomerCount);
+    
+})
+
+clearSelectedItem.addEventListener('click', () => {
+    
+
+    for (let arrayCount = 0; arrayCount < itemPrices.length; arrayCount ++) {
+        if (itemPrices[arrayCount].currentCustomerCount > 0) {
+            let liCreater = document.createElement("li");
+            liCreater.classList.add('liCurrentCustomerItem');
+            liCreater.innerText = itemPrices[arrayCount].name + " count = " + itemPrices[arrayCount].currentCustomerCount;
+            listCurrentOrders.appendChild(liCreater);
+        }
+
+    }
+})
+
+nextCustomer.addEventListener('click', () => {
+    salesPeriodTotalRevenue = 0;
+    price = 0;
+    totalCurrentCustomer.innerHTML = '€' + price + ',-';
+    //main funct 1 Add products to a list to be processed into an xml file -> how to? indexedDB!? later
+    //main funct 2 Delete the current customers data from the current order -> can be done now
+    //If item has been bought by current customer, add it to total of current sales period and revenue current sales period
+    for (let arrayCount = 0; arrayCount < itemPrices.length; arrayCount ++) {
+        if (itemPrices[arrayCount].currentCustomerCount > 0) {
+            itemPrices[arrayCount].totalBoughtPeriodCount += itemPrices[arrayCount].currentCustomerCount;
+            itemPrices[arrayCount].totalBoughtPeriodRevenue += itemPrices[arrayCount].price * itemPrices[arrayCount].currentCustomerCount;
+            console.log("salesPeriodTotalRevenue: " + salesPeriodTotalRevenue);
+            console.log("salesPeriodTotalRevenue: " + salesPeriodTotalRevenue);            
+            console.log(itemPrices[arrayCount]);
+            itemPrices[arrayCount].currentCustomerCount = 0;
+            listCurrentOrders.removeChild(listCurrentOrders.firstChild);
+        }
+    }
+    for (let arrayCount = 0; arrayCount < itemPrices.length; arrayCount ++) {
+        salesPeriodTotalRevenue += itemPrices[arrayCount].totalBoughtPeriodRevenue;
+    }
+    todayTotalNumber.innerHTML = 'total today : €' + salesPeriodTotalRevenue + ',-';    
+
+    let itempricesJsonObj = JSON.stringify(itemPrices);
+    localStorage.setItem("itemPricesArray", itempricesJsonObj);
+    itempricesJsonObjTest = localStorage.getItem("itemPricesArray");
+    console.log(itemPrices);
+
+ })
+
+ todayTotalList.addEventListener('click', () => {
+    //Generate pop up screen which shows all sold items + revenue + option to download data to export to spreadsheet + reset salesperiod'
+    productButtonBox.style.display = "none";
+    orderListBox.style.display = "none";
+    orderControlBox.hidden = true;
+    totalSalesPeriodBox.style.display = "flex";
+    closeTotalSalesPeriodBox.hidden = false;
+    arrayTotalProduct.hidden = false;
+    for (arrayCount = 0; arrayCount < itemPrices.length; arrayCount ++){
+        if (itemPrices[arrayCount].totalBoughtPeriodCount > 0) {
+        let liCreater = document.createElement("li");
+        liCreater.classList.add('liLocalStoredItemPriceArrayRestoredLi');
+        liCreater.innerText = "Name: " + itemPrices[arrayCount].name + " Total sold: " + itemPrices[arrayCount].totalBoughtPeriodCount + " Item Revenue: " + itemPrices[arrayCount].totalBoughtPeriodRevenue;
+        arrayTotalProducts.appendChild(liCreater);
+        }
+ 
+    }
+ }
+)
+
+
 closeTotalSalesPeriodBox.addEventListener('click', () => {
-    productButtonBox.hidden = false;
-    orderListBox.hidden = false;
+    productButtonBox.style.display = "grid";
+    orderListBox.style.display = "flex";
     orderControlBox.hidden = false;
     totalSalesPeriodBox.hidden = true;
     closeTotalSalesPeriodBox.hidden = true;
