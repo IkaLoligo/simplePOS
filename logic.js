@@ -235,12 +235,12 @@ addOne.addEventListener('click', () => {
 
 
 removeOne.addEventListener('click',() => {
-    if (price > 0) {
+    if (price > 0 && itemPrices[selectedNumber].currentCustomerCount > 0 ) {
         price -= itemPrices[selectedNumber].price;
         totalCurrentCustomer.innerHTML = '€' + price + ',-';
     }
     else {
-        totalCurrentCustomer.innerHTML = '€' + 0 + ',-';
+        totalCurrentCustomer.innerHTML = '€' + price + ',-';
     }
 
     
@@ -341,7 +341,9 @@ clearSelectedItem.addEventListener('click', () => {
         listCurrentOrders.removeChild(listCurrentOrders.firstChild);
     };
 
+    price -= itemPrices[selectedNumber].currentCustomerCount * itemPrices[selectedNumber].price;
     itemPrices[selectedNumber].currentCustomerCount = 0;
+    totalCurrentCustomer.innerHTML = '€' + price + ',-';
     
     for (let arrayCount = 0; arrayCount < itemPrices.length; arrayCount ++) {
         if (itemPrices[arrayCount].currentCustomerCount > 0) {
@@ -352,6 +354,21 @@ clearSelectedItem.addEventListener('click', () => {
         }
 
     }    
+})
+
+clearBasket.addEventListener('click', () => {
+    while (listCurrentOrders.firstChild) {
+        listCurrentOrders.removeChild(listCurrentOrders.firstChild);
+    };
+
+    price = 0;
+    totalCurrentCustomer.innerHTML = '€' + price + ',-';
+
+    for (let arrayCount = 0; arrayCount < itemPrices.length; arrayCount ++) {
+        if (itemPrices[arrayCount].currentCustomerCount > 0) {
+            itemPrices[arrayCount].currentCustomerCount = 0};
+            console.log(itemPrices[arrayCount].currentCustomerCount);
+    } 
 })
 
 nextCustomer.addEventListener('click', () => {
