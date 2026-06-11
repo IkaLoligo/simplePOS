@@ -45,6 +45,8 @@ const product8 = document.querySelector(".itemButton:nth-child(8)")
 const product9 = document.querySelector(".itemButton:nth-child(9)")
 const product10 = document.querySelector(".itemButton:nth-child(10)")
 
+
+
 //orderControlBox buttons 
 const addOne = document.getElementById("addOne")
 const removeOne = document.getElementById("removeOne")
@@ -68,8 +70,90 @@ function sale (id, type, ammount) {
 let salesStored = JSON.parse(localStorage.getItem('sales'));
 let itemsStored = JSON.parse(localStorage.getItem('items'));
 let buttonsStored = JSON.parse(localStorage.getItem('buttons'));
+let buttonIdHistory = JSON.parse(localStorage.getItem('lastBtnId'));
+
+function buttonsInit () {
+    while (productButtonBox.firstChild) {
+        productButtonBox.removeChild(productButtonBox.firstChild);
+    };
+    let findMainCategories = buttonsStored.filter((category) => category.category === 'mainCategory')
+    for (let arrayCount = 0; arrayCount < findMainCategories.length; arrayCount ++) {
+        let buttonCreator = document.createElement("button");
+        buttonCreator.setAttribute("id", findMainCategories[arrayCount].buttonID);
+        buttonCreator.classList.add('itemButton')
+        buttonCreator.innerText = findMainCategories[arrayCount].name;
+        productButtonBox.appendChild(buttonCreator);
+    }
+}
+buttonsInit();
+
+productButtonBox.addEventListener('click', () => {
+    if (event.target.classList.contains('itemButton' )){
+        let buttonID = event.target.id
+        let getButton = buttonsStored.find((button) => button.buttonID === buttonID);
+        let buttonSubCat = getButton.subcategory;
+        let buttonSubCatsArray = buttonsStored.filter((gatherChilderen) => gatherChilderen.category === buttonSubCat);
+
+        buttonIdHistory.push(buttonID)
+        localStorage.setItem('lastBtnId', JSON.stringify(buttonIdHistory));
+        
+        while (productButtonBox.firstChild) {
+            productButtonBox.removeChild(productButtonBox.firstChild);
+        };
+        let createBackBtn = document.createElement("button");
+        createBackBtn.classList.add('backButton')
+        createBackBtn.setAttribute("id", buttonID);
+        createBackBtn.innerText = "Back"
+        productButtonBox.appendChild(createBackBtn);
+        for (arrayCount = 0; arrayCount < buttonSubCatsArray.length; arrayCount ++) {
+            let buttonCreator = document.createElement("button");
+            buttonCreator.setAttribute("id", buttonSubCatsArray[arrayCount].buttonID);
+            buttonCreator.classList.add('itemButton');
+            buttonCreator.innerText = buttonSubCatsArray[arrayCount].name;
+            productButtonBox.appendChild(buttonCreator);
+        }
+
+    }
+})
+
+productButtonBox.addEventListener('click', () => {
+    if (event.target.classList.contains('backButton')){
+        buttonIdHistory = JSON.parse(localStorage.getItem('lastBtnId'))
+        buttonIdHistory.pop();
+        localStorage.setItem('lastBtnId', buttonIdHistory);
+        let buttonID = buttonIdHistory[buttonIdHistory.length -= 1];
+        console.log(buttonID);
+        let getButton = buttonsStored.find((button) => button.buttonID === buttonID);
+        let buttonCat = getButton.category;
+        let buttonCatsArray = buttonsStored.filter((gatherParents) => gatherParents.category === buttonCat);
+
+
+        console.log(buttonID)
+        console.log(getButton)
+        console.log(buttonCat)
+        console.log(buttonCatsArray)
+        while (productButtonBox.firstChild) {
+            productButtonBox.removeChild(productButtonBox.firstChild);
+        };
+
+        let createBackBtn = document.createElement("button");
+        createBackBtn.classList.add('backButton')
+        createBackBtn.setAttribute("id", buttonID);
+        createBackBtn.innerText = "Back"
+        productButtonBox.appendChild(createBackBtn);
+        
+        for (arrayCount = 0; arrayCount < buttonCatsArray.length; arrayCount ++) {
+            let buttonCreator = document.createElement("button");
+            buttonCreator.setAttribute("id", buttonCatsArray[arrayCount].buttonID);
+            buttonCreator.classList.add('itemButton');
+            buttonCreator.innerText = buttonCatsArray[arrayCount].name;
+            productButtonBox.appendChild(buttonCreator);
+        }
+    }
+})
 
 //select product logic
+/*
 product1.addEventListener('click', () => {
     selected.innerText = product1.innerText;
     console.log("button 1 pressed!");
@@ -132,7 +216,7 @@ product10.addEventListener('click', () => {
     console.log("button 10 pressed!");
     selectedNumber = 9;
 })
-
+*/
 
 
 
@@ -169,6 +253,7 @@ addOne.addEventListener('click', () => {
     console.log(itemsStored[selectedNumber].currentCustomerCount);
     
 })
+
 
 
 removeOne.addEventListener('click',() => {
