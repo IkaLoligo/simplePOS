@@ -121,7 +121,7 @@ productButtonBox.addEventListener('click', () => {
         buttonIdHistory = JSON.parse(localStorage.getItem('lastBtnId'))
         buttonIdHistory.pop();
         localStorage.setItem('lastBtnId', buttonIdHistory);
-        let buttonID = buttonIdHistory[buttonIdHistory.length -= 1];
+        let buttonID = buttonIdHistory[buttonIdHistory.length - 1];
         console.log(buttonID);
         let getButton = buttonsStored.find((button) => button.buttonID === buttonID);
         let buttonCat = getButton.category;
