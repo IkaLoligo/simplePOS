@@ -72,170 +72,193 @@ let items = [
 ]
 
 let buttons = [
-    {
-        category: 'mainCategory',
-        subcategory: 'printedGoods',
-        name: 'Printed Goods',
-        canBeSold: false,
-        id: 0,
-    },
-        {
-            category: 'printedGoods',
-            subcategory: 'prints',
-            name: 'Prints',
-            canBeSold: false,
-            id: 0,
-        },
-            {
-                category: 'prints',
-                subcategory: 'a5',
-                name: 'Print a5',
-                canBeSold: true,
-                id: 1,
-            },
-            {
-                category: 'prints',
-                subcategory: 'a4',
-                name: 'Print a4',
-                canBeSold: true,
-                id: 2,
-            },
-            {
-                category: 'prints',
-                subcategory: 'eeveeRoll',
-                name: 'Eevee Roll',
-                canBeSold: true,
-                id: 3,
-            },
-        {
-            category: 'printedGoods',
-            subcategory: 'stickers',
-            name: 'Stickers',
-            canBeSold: false,
-            id: 0,
-        },
-            {
-                category: 'stickers',
-                subcategory: 'hannahStickers',
-                name: 'Hannah Stickers',
-                canBeSold: true,
-                id: 4,
-            },
-            {
-                category: 'stickers',
-                subcategory: 'merlijnStickers',
-                name: 'Merlijn Stickers',
-                canBeSold: true,
-                id: 8,
-            },
-        {
-            category: 'printedGoods',
-            subcategory: 'stickersBook',
-            name: 'Stickers Book',
-            canBeSold: true,
-            id: 13,
-        },
-        {
-            category: 'printedGoods',
-            subcategory: 'pokemonCard',
-            name: 'Pokemon Proxy Card',
-            canBeSold: true,
-            id: 16,
-        },
-    
-    {
-        category: 'mainCategory',
-        subcategory: 'accesoires',
-        name: 'Accesoires',
-        canBeSold: false,
-        id: 0,
-    },
-        {
-            category: 'accesoires',
-            subcategory: 'keyChains',
-            name: 'Key Chains',
-            canBeSold: true,
-            id: 5,
-        },
-        {
-            category: 'accesoires',
-            subcategory: 'plushyKeychain',
-            name: 'Jiji Plushy Keychain',
-            canBeSold: true,
-            id: 10,
-        },
-        {
-            category: 'accesoires',
-            subcategory: 'mysteryBag',
-            name: 'Key Chains',
-            canBeSold: true,
-            id: 6,
-        },
-        {
-            category: 'accesoires',
-            subcategory: 'buttons',
-            name: 'Pride Buttons',
-            canBeSold: true,
-            id: 11,
-        },
-        {
-            category: 'accesoires',
-            subcategory: 'pins',
-            name: 'Wooden pins',
-            canBeSold: true,
-            id: 12,
-        },
-    {
-        category: 'mainCategory',
-        subcategory: 'fashionItems',
-        name: 'Fashion Items',
-        canBeSold: false,
-        id: 0,
-    },
-        {
-            category: 'fashionItems',
-            subcategory: 'hairclip',
-            name: 'Plussle/Minum hairclip',
-            canBeSold: true,
-            id: 7,
-        },
-        {
-            category: 'fashionItems',
-            subcategory: 'handFan',
-            name: 'Hand Fan',
-            canBeSold: true,
-            id: 9,
-        },
-    {
-        category: 'mainCategory',
-        subcategory: 'homeDecor',
-        name: 'Home Decor',
-        canBeSold: false,
-        id: 0,
-    },
-            {
-            category: 'homeDecor',
-            subcategory: 'gleebleCushion',
-            name: 'Gleeble Cushion',
-            canBeSold: true,
-            id: 14,
-        },
-        {
-            category: 'homeDecor',
-            subcategory: 'mousemats',
-            name: 'Jirachi Mouse Mat',
-            canBeSold: true,
-            id: 15,
-        },
+	{
+		category: 'mainCategory',
+		subcategory: 'printedGoods',
+		name: 'Printed Goods',
+		canBeSold: false,
+		productid: 0,
+		buttonID: 'b1000',
+	},
+		{
+			category: 'printedGoods',
+			subcategory: 'prints',
+			name: 'Prints',
+			canBeSold: false,
+			productid: 0,
+			buttonID: 'b1100',
+		},
+			{
+				category: 'prints',
+				subcategory: 'a5',
+				name: 'Print a5',
+				canBeSold: true,
+				productid: 1,
+				buttonID: 'b1101',
+			},
+			{
+				category: 'prints',
+				subcategory: 'a4',
+				name: 'Print a4',
+				canBeSold: true,
+				productid: 2,
+				buttonID: 'b1102',
+			},
+			{
+				category: 'prints',
+				subcategory: 'eeveeRoll',
+				name: 'Eevee Roll',
+				canBeSold: true,
+				productid: 3,
+				buttonID: 'b1103',
+			},
+	{
+		category: 'printedGoods',
+		subcategory: 'stickers',
+		name: 'Stickers',
+		canBeSold: false,
+		productid: 0,
+		buttonID: 'b1200',
+	},
+		{
+			category: 'stickers',
+			subcategory: 'hannahStickers',
+			name: 'Hannah Stickers',
+			canBeSold: true,
+			productid: 4,
+			buttonID: 'b1201',
+		},
+		{
+			category: 'stickers',
+			subcategory: 'merlijnStickers',
+			name: 'Merlijn Stickers',
+			canBeSold: true,
+			productid: 8,
+			buttonID: 'b1202',
+		},
+	{
+		category: 'printedGoods',
+		subcategory: 'stickersBook',
+		name: 'Stickers Book',
+		canBeSold: true,
+		productid: 13,
+		buttonID: 'b1400',
+	},
+	{
+		category: 'printedGoods',
+		subcategory: 'pokemonCard',
+		name: 'Pokemon Proxy Card',
+		canBeSold: true,
+		productid: 16,
+		buttonID: 'b1500',
+	},
 
-]
+	{
+		category: 'mainCategory',
+		subcategory: 'accesoires',
+		name: 'Accesoires',
+		canBeSold: false,
+		productid: 0,
+		buttonID: 'b2000',
+	},
+		{
+			category: 'accesoires',
+			subcategory: 'keyChains',
+			name: 'Key Chains',
+			canBeSold: true,
+			productid: 5,
+			buttonID: 'b2100',
+		},
+		{
+			category: 'accesoires',
+			subcategory: 'plushyKeychain',
+			name: 'Jiji Plushy Keychain',
+			canBeSold: true,
+			productid: 10,
+			buttonID: 'b2200',
+		},
+		{
+			category: 'accesoires',
+			subcategory: 'mysteryBag',
+			name: 'Key Chains',
+			canBeSold: true,
+			productid: 6,
+			buttonID: 'b2300',
+		},
+		{
+			category: 'accesoires',
+			subcategory: 'buttons',
+			name: 'Pride Buttons',
+			canBeSold: true,
+			productid: 11,
+			buttonID: 'b2400',
+		},
+		{
+			category: 'accesoires',
+			subcategory: 'pins',
+			name: 'Wooden pins',
+			canBeSold: true,
+			productid: 12,
+			buttonID: 'b2500',
+		},
+	{
+		category: 'mainCategory',
+		subcategory: 'fashionItems',
+		name: 'Fashion Items',
+		canBeSold: false,
+		productid: 0,
+		buttonID: 'b3000',
+	},
+		{
+			category: 'fashionItems',
+			subcategory: 'hairclip',
+			name: 'Plussle/Minum hairclip',
+			canBeSold: true,
+			productid: 7,
+			buttonID: 'b3100',
+		},
+		{
+			category: 'fashionItems',
+			subcategory: 'handFan',
+			name: 'Hand Fan',
+			canBeSold: true,
+			productid: 9,
+			buttonID: 'b3200',
+		},
+	{
+		category: 'mainCategory',
+		subcategory: 'homeDecor',
+		name: 'Home Decor',
+		canBeSold: false,
+		productid: 0,
+		buttonID: 'b4000',
+	},
+			{
+			category: 'homeDecor',
+			subcategory: 'gleebleCushion',
+			name: 'Gleeble Cushion',
+			canBeSold: true,
+			productid: 14,
+			buttonID: 'b4100',
+		},
+		{
+			category: 'homeDecor',
+			subcategory: 'mousemats',
+			name: 'Jirachi Mouse Mat',
+			canBeSold: true,
+			productid: 15,
+			buttonID: 'b4200',
+		},
+];
 
 
 let sales = [
 
 ]
 
+let lastBtnId = [
 
+]
 
 
 function declaredCheckItemPrices() {
@@ -247,6 +270,18 @@ function declaredCheckItemPrices() {
 
     else {
         console.log('Data was already initialised :)')
+    }
+}
+
+function declaredCheckLastBtnId() {
+    if (localStorage.getItem("lastBtnId") === null) {
+        let lastBtnIdJSON= JSON.stringify(lastBtnId);
+        localStorage.setItem('lastBtnId', lastBtnIdJSON); 
+        console.log('lastBtnIds are initialised! :)')
+    }
+
+    else {
+        console.log('lastBtnIds were already loaded')
     }
 }
 
@@ -263,7 +298,8 @@ function declaredCheckSales() {
 }
 
 function declaredCheckButtons() {
-    if (localStorage.getItem("buttons") === null) {
+    let buttonsLocalCheck = JSON.parse(localStorage.getItem('buttons'));
+    if (localStorage.getItem("buttons") === null || !buttonsLocalCheck == buttonsLocalCheck ) {
         let buttonsJSON = JSON.stringify(buttons);
         localStorage.setItem('buttons', buttonsJSON); 
         console.log('buttons are initialised! :)')
@@ -277,3 +313,4 @@ function declaredCheckButtons() {
 declaredCheckItemPrices();
 declaredCheckSales();
 declaredCheckButtons();
+declaredCheckLastBtnId();
