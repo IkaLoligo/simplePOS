@@ -136,6 +136,7 @@ product10.addEventListener('click', () => {
 
 
 
+
 //Add one logic
 addOne.addEventListener('click', () => {
     price += itemsStored[selectedNumber].price;
@@ -422,6 +423,18 @@ payByCard.addEventListener('click', () => {
 
 })
 //view total today
+viewTotalToday.addEventListener('click', () => {
+    let totalToday = 0;
+    for (let arrayCount = 0; arrayCount < salesStored.length; arrayCount++) {
+        totalToday += salesStored[arrayCount].ammount;
+        console.log(salesStored[arrayCount].ammount)
+        console.log(salesStored[arrayCount]);
+        console.log(arrayCount)
+        
+    }
+    console.log(totalToday);
+
+})
 
 //view total convention
 nextCustomer.addEventListener('click', () => {
