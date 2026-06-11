@@ -67,7 +67,7 @@ function sale (id, type, ammount) {
 
 let salesStored = JSON.parse(localStorage.getItem('sales'));
 let itemsStored = JSON.parse(localStorage.getItem('items'));
-console.log(itemsStored)
+let buttonsStored = JSON.parse(localStorage.getItem('buttons'));
 
 //select product logic
 product1.addEventListener('click', () => {
