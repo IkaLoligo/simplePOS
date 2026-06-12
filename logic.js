@@ -88,12 +88,13 @@ function buttonsInit () {
 buttonsInit();
 
 productButtonBox.addEventListener('click', () => {
-    if (event.target.classList.contains('itemButton' )){
         let buttonID = event.target.id
         let getButton = buttonsStored.find((button) => button.buttonID === buttonID);
+        console.log(getButton)
         let buttonSubCat = getButton.subcategory;
         let buttonSubCatsArray = buttonsStored.filter((gatherChilderen) => gatherChilderen.category === buttonSubCat);
-
+    if (event.target.classList.contains('itemButton') && getButton.canBeSold == false){
+        //handles menu navigation
         buttonIdHistory.push(buttonID)
         localStorage.setItem('lastBtnId', JSON.stringify(buttonIdHistory));
         
@@ -112,7 +113,9 @@ productButtonBox.addEventListener('click', () => {
             buttonCreator.innerText = buttonSubCatsArray[arrayCount].name;
             productButtonBox.appendChild(buttonCreator);
         }
-
+    }
+    else if ((event.target.classList.contains('itemButton') && getButton.canBeSold == true)){
+        console.log('Yay')
     }
 })
 
