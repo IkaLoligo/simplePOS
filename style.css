@@ -147,3 +147,45 @@ button {
     grid-column: 1/3;
     grid-row: 8/9;
 }
+
+.popUp {
+        background-color: #E4F3EE;
+        color: #5C767D;
+        border-radius: 12px;
+        border-style: none;
+        justify-self: center;
+        align-self: center;
+        width: 98%;
+        height: 98%;
+        grid-column: 2/4;
+        grid-row: 1/2;
+        
+}
+
+
+
+#selectedDiv {
+    background-color: #6A94AA;
+    color: #FEFFD3;
+    border-radius: 12px;
+    grid-column: 1 / 3;
+    justify-self: center;
+    align-self: center;
+    text-align: center;
+    
+    width: 90%;
+    height: 50%;
+}
+
+#todaysTotalP{
+    background-color: #6A94AA;
+    color: #FEFFD3;
+    border-radius: 12px;
+    justify-self: center;
+    align-self: center;
+    text-align: center;
+    
+    width: 90%;
+    height: auto;
+    padding: 2% 0 2% 0;
+}

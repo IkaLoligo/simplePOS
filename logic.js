@@ -59,6 +59,7 @@ const payByCard = document.getElementById("payByCard")
 const viewTotalToday = document.getElementById("viewTotalToday")
 const viewTotalConvention = document.getElementById("viewTotalConvention")
 const endDay = document.getElementById("endDay")
+const todaysTotalCloseBtn = document.getElementById("todaysTotalCloseBtn")
 
 //constructor for sale object
 function sale (id, type, ammount) {
@@ -70,7 +71,6 @@ function sale (id, type, ammount) {
 let salesStored = JSON.parse(localStorage.getItem('sales'));
 let itemsStored = JSON.parse(localStorage.getItem('items'));
 let buttonsStored = JSON.parse(localStorage.getItem('buttons'));
-let buttonIdHistory = JSON.parse(localStorage.getItem('lastBtnId'));
 
 function buttonsInit () {
     while (productButtonBox.firstChild) {
@@ -85,75 +85,83 @@ function buttonsInit () {
         productButtonBox.appendChild(buttonCreator);
     }
 }
-buttonsInit();
 
-productButtonBox.addEventListener('click', () => {
-        let buttonID = event.target.id
-        let getButton = buttonsStored.find((button) => button.buttonID === buttonID);
-        console.log(getButton)
-        let buttonSubCat = getButton.subcategory;
-        let buttonSubCatsArray = buttonsStored.filter((gatherChilderen) => gatherChilderen.category === buttonSubCat);
-    if (event.target.classList.contains('itemButton') && getButton.canBeSold == false){
-        //handles menu navigation
-        buttonIdHistory.push(buttonID)
-        localStorage.setItem('lastBtnId', JSON.stringify(buttonIdHistory));
-        
-        while (productButtonBox.firstChild) {
-            productButtonBox.removeChild(productButtonBox.firstChild);
-        };
-        let createBackBtn = document.createElement("button");
-        createBackBtn.classList.add('backButton')
-        createBackBtn.setAttribute("id", buttonID);
-        createBackBtn.innerText = "Back"
-        productButtonBox.appendChild(createBackBtn);
-        for (arrayCount = 0; arrayCount < buttonSubCatsArray.length; arrayCount ++) {
-            let buttonCreator = document.createElement("button");
-            buttonCreator.setAttribute("id", buttonSubCatsArray[arrayCount].buttonID);
-            buttonCreator.classList.add('itemButton');
-            buttonCreator.innerText = buttonSubCatsArray[arrayCount].name;
-            productButtonBox.appendChild(buttonCreator);
+buttonsInit()
+// Changes made by Vibe (Mistral AI)(used out of frustration...):
+// 1. Added `event` parameter to the event listener to access `event.target`.
+// 2. Added a `navigationStack` array to track the history of button lists for back navigation.
+// 3. Pushed the current button list to `navigationStack` before navigating forward.
+// 4. Added logic to handle `backButton` clicks by popping the last state from `navigationStack` and restoring it.
+// 5. Fixed the `for` loop by declaring `arrayCount` with `let` to avoid global scope issues.
+let navigationStack = [];
+
+productButtonBox.addEventListener('click', (event) => {
+    if (event.target.classList.contains('itemButton')) {
+        let buttonID = event.target.id;
+        let getButtonObject = buttonsStored.find((correspondingId) => correspondingId.buttonID === buttonID);
+        let getCorrespondingSubCat = getButtonObject.subCategory;
+        let newButtonList = buttonsStored.filter((gatherButton) => gatherButton.category === getCorrespondingSubCat);
+
+        if (getButtonObject.canBeSold === false) {
+            // Push the current state to the stack
+            navigationStack.push({
+                buttons: Array.from(productButtonBox.children).map(button => ({
+                    id: button.id,
+                    name: button.innerText,
+                    class: button.className
+                }))
+            });
+
+            // Clear the productButtonBox
+            while (productButtonBox.firstChild) {
+                productButtonBox.removeChild(productButtonBox.firstChild);
+            };
+
+            // Create the back button
+            let createBackBtn = document.createElement("button");
+            createBackBtn.classList.add('backButton');
+            createBackBtn.setAttribute("id", getButtonObject.buttonID);
+            createBackBtn.innerText = "Back";
+            productButtonBox.appendChild(createBackBtn);
+
+            // Create new buttons
+            for (let arrayCount = 0; arrayCount < newButtonList.length; arrayCount++) {
+                let buttonCreator = document.createElement("button");
+                buttonCreator.setAttribute("id", newButtonList[arrayCount].buttonID);
+                buttonCreator.classList.add('itemButton');
+                buttonCreator.innerText = newButtonList[arrayCount].name;
+                productButtonBox.appendChild(buttonCreator);
+            }
+        }
+        else if (getButtonObject.canBeSold === true) {
+            let productId = getButtonObject.productid;
+            selected.innerText = getButtonObject.name;
+            selectedNumber = productId - 1;
         }
     }
-    else if ((event.target.classList.contains('itemButton') && getButton.canBeSold == true)){
-        console.log('Yay')
-    }
-})
 
-productButtonBox.addEventListener('click', () => {
-    if (event.target.classList.contains('backButton')){
-        buttonIdHistory = JSON.parse(localStorage.getItem('lastBtnId'))
-        buttonIdHistory.pop();
-        localStorage.setItem('lastBtnId', buttonIdHistory);
-        let buttonID = buttonIdHistory[buttonIdHistory.length - 1];
-        console.log(buttonID);
-        let getButton = buttonsStored.find((button) => button.buttonID === buttonID);
-        let buttonCat = getButton.category;
-        let buttonCatsArray = buttonsStored.filter((gatherParents) => gatherParents.category === buttonCat);
+    // Handle back button clicks
+    else if (event.target.classList.contains('backButton')) {
+        // Pop the last state from the stack
+        const previousState = navigationStack.pop();
 
+        if (previousState) {
+            // Clear the productButtonBox
+            while (productButtonBox.firstChild) {
+                productButtonBox.removeChild(productButtonBox.firstChild);
+            }
 
-        console.log(buttonID)
-        console.log(getButton)
-        console.log(buttonCat)
-        console.log(buttonCatsArray)
-        while (productButtonBox.firstChild) {
-            productButtonBox.removeChild(productButtonBox.firstChild);
-        };
-
-        let createBackBtn = document.createElement("button");
-        createBackBtn.classList.add('backButton')
-        createBackBtn.setAttribute("id", buttonID);
-        createBackBtn.innerText = "Back"
-        productButtonBox.appendChild(createBackBtn);
-        
-        for (arrayCount = 0; arrayCount < buttonCatsArray.length; arrayCount ++) {
-            let buttonCreator = document.createElement("button");
-            buttonCreator.setAttribute("id", buttonCatsArray[arrayCount].buttonID);
-            buttonCreator.classList.add('itemButton');
-            buttonCreator.innerText = buttonCatsArray[arrayCount].name;
-            productButtonBox.appendChild(buttonCreator);
+            // Restore the previous buttons
+            previousState.buttons.forEach(button => {
+                const restoredButton = document.createElement("button");
+                restoredButton.setAttribute("id", button.id);
+                restoredButton.classList.add(...button.class.split(' '));
+                restoredButton.innerText = button.name;
+                productButtonBox.appendChild(restoredButton);
+            });
         }
     }
-})
+});
 
 //select product logic
 /*
@@ -510,20 +518,44 @@ payByCard.addEventListener('click', () => {
     }
 
 })
-//view total today
+// Added by Vibe (Mistral AI):
+// Implemented CSV download functionality for the `viewTotalToday` button.
+// When clicked, it converts the `salesStored` array into a CSV file with ID, Type, and Amount in separate columns.
+// Uses semicolon as delimiter for better Excel compatibility.
+
 viewTotalToday.addEventListener('click', () => {
-    let totalToday = 0;
-    for (let arrayCount = 0; arrayCount < salesStored.length; arrayCount++) {
-        totalToday += salesStored[arrayCount].ammount;
-        console.log(salesStored[arrayCount].ammount)
-        console.log(salesStored[arrayCount]);
-        console.log(arrayCount)
-        
+    // Convert sales array to CSV string
+    const csvContent = convertSalesToCSV(salesStored);
+
+    // Create a downloadable link
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.setAttribute('href', url);
+    link.setAttribute('download', 'sales_data.csv');
+    document.body.appendChild(link);
+
+    // Trigger the download
+    link.click();
+    document.body.removeChild(link);
+});
+
+// Helper function to convert sales array to CSV
+function convertSalesToCSV(sales) {
+    if (!sales || sales.length === 0) {
+        return "No sales data available.\n";
     }
-    console.log(totalToday);
 
-})
+    // CSV header: ID;Type;Amount (using semicolon as delimiter)
+    let csv = "ID;Type;Amount\n";
 
+    // Add each sale as a row in the CSV
+    sales.forEach((sale) => {
+        csv += `${sale.id};${sale.type};${sale.ammount}\n`;
+    });
+
+    return csv;
+}
 //view total convention
 nextCustomer.addEventListener('click', () => {
     salesPeriodTotalRevenue = 0;
