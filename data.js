@@ -42,7 +42,7 @@ let items = [
     {
         name:"Stickerbook",
 		productId: 6,
-        price: 10,
+        price: 8,
         currentCustomerCount: 0,
         totalBoughtPeriodCount: 0,
         totalBoughtPeriodRevenue: 0,
@@ -66,7 +66,7 @@ let items = [
     {
         name:"Plushy keychain",
 		productId: 9,
-        price: 10,
+        price: 15,
         currentCustomerCount: 0,
         totalBoughtPeriodCount: 0,
         totalBoughtPeriodRevenue: 0,
@@ -74,7 +74,7 @@ let items = [
     {
         name:"Mysterybag",
 		productId: 10,
-        price: 6,
+        price: 7,
         currentCustomerCount: 0,
         totalBoughtPeriodCount: 0,
         totalBoughtPeriodRevenue: 0,
@@ -90,7 +90,7 @@ let items = [
     {
         name:"Wooden pins",
 		productId: 12,
-        price: 6,
+        price: 3,
         currentCustomerCount: 0,
         totalBoughtPeriodCount: 0,
         totalBoughtPeriodRevenue: 0,
@@ -98,7 +98,7 @@ let items = [
     {
         name:"hairclip",
 		productId: 13,
-        price: 6,
+        price: 7,
         currentCustomerCount: 0,
         totalBoughtPeriodCount: 0,
         totalBoughtPeriodRevenue: 0,
@@ -106,7 +106,7 @@ let items = [
     {
         name:"Hand fan",
 		productId: 14,
-        price: 6,
+        price: 7,
         currentCustomerCount: 0,
         totalBoughtPeriodCount: 0,
         totalBoughtPeriodRevenue: 0,
@@ -114,7 +114,7 @@ let items = [
     {
         name:"Gleeble Cushion",
 		productId: 15,
-        price: 20,
+        price: 25,
         currentCustomerCount: 0,
         totalBoughtPeriodCount: 0,
         totalBoughtPeriodRevenue: 0,
@@ -126,7 +126,15 @@ let items = [
         currentCustomerCount: 0,
         totalBoughtPeriodCount: 0,
         totalBoughtPeriodRevenue: 0,
-    },				
+    },		
+	{
+        name:"pkm tas",
+		productId: 17,
+        price: 15,
+        currentCustomerCount: 0,
+        totalBoughtPeriodCount: 0,
+        totalBoughtPeriodRevenue: 0,
+    },			
 ]
 
 let buttons = [
@@ -282,6 +290,14 @@ let buttons = [
 			canBeSold: true,
 			productid: 14,
 			buttonID: 'b3200',
+		},
+		{
+			category: 'fashionItems',
+			subCategory: 'Tas',
+			name: 'Pokemon tas',
+			canBeSold: true,
+			productid: 17,
+			buttonID: 'b3300',
 		},
 	{
 		category: 'mainCategory',
