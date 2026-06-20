@@ -57,7 +57,7 @@ const clearBasket = document.getElementById("clearBasket")
 const payByCash = document.getElementById("payByCash");
 const payByCard = document.getElementById("payByCard")
 const viewTotalToday = document.getElementById("viewTotalToday")
-const viewTotalConvention = document.getElementById("viewTotalConvention")
+const viewTotalItems = document.getElementById("viewTotalItems")
 const endDay = document.getElementById("endDay")
 const todaysTotalCloseBtn = document.getElementById("todaysTotalCloseBtn")
 
@@ -489,6 +489,8 @@ payByCard.addEventListener('click', () => {
 
         for (let arrayCount = 0; arrayCount < itemsStored.length; arrayCount ++) {
             if (itemsStored[arrayCount].currentCustomerCount > 0) {
+                itemsStored[arrayCount].totalBoughtPeriodCount += itemsStored[arrayCount].currentCustomerCount;
+                console.log(itemsStored[arrayCount].totalBoughtPeriodCount += itemsStored[arrayCount].currentCustomerCount)
                 itemsStored[arrayCount].currentCustomerCount = 0};
                 console.log(itemsStored[arrayCount].currentCustomerCount);
         } 
@@ -556,6 +558,41 @@ function convertSalesToCSV(sales) {
 
     return csv;
 }
+
+viewTotalItems.addEventListener('click', () => {
+    // Convert sales array to CSV string
+    const csvContent = convertItemsToCSV(itemsStored);
+
+    // Create a downloadable link
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.setAttribute('href', url);
+    link.setAttribute('download', 'sales_data.csv');
+    document.body.appendChild(link);
+
+    // Trigger the download
+    link.click();
+    document.body.removeChild(link);
+});
+
+function convertItemsToCSV(items) {
+    if (!items || items.length === 0) {
+        return "No sales data available.\n";
+    }
+
+    // CSV header: ID;Type;Amount (using semicolon as delimiter)
+    let csv = "Name;productId;price;currentCustomerCount;totalBoughtPerPeriod;totalBoughtPeriodRevenue\n";
+
+    // Add each sale as a row in the CSV
+    items.forEach((item) => {
+        csv += `${item.name};${item.productId};${item.price};${item.currentCustomerCount};${item.totalBoughtPeriodCount};${item.totalBoughtPeriodRevenue}\n`;
+    });
+
+    return csv;
+}
+
+
 //view total convention
 nextCustomer.addEventListener('click', () => {
     salesPeriodTotalRevenue = 0;
